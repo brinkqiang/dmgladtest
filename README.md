@@ -23,8 +23,15 @@ Copyright (c) 2013-2018 brinkqiang (brink.qiang@gmail.com)
 
 ## Intro
 dmgladtest
-```cpp
+
+# env
 ```
+vcpkg install glad:x64-windows
+vcpkg install opengl:x64-windows
+vcpkg install glfw3:x64-windows
+```
+
+
 ## Contacts
 
 ## Thanks
