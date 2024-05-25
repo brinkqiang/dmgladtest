@@ -17,6 +17,5 @@ include_directories(${OpenGL_INCLUDE_DIRS})
 link_directories(${GLFW_LIBRARY_DIRS})
 link_directories(${GLAD_LIBRARY_DIRS})
 link_directories(${OpenGL_LIBRARY_DIRS})
-ModuleImportAll("thirdparty")
 
 ExeImport("test" "glad::glad;glfw;opengl32")
