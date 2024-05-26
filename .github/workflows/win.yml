@@ -18,6 +18,8 @@ jobs:
             vcpkg_triplet: x64-windows
 
     steps:
+      - uses: actions/checkout@v4
+      - uses: lukka/get-cmake@latest
       - name: vcpkg build
         uses: brinkqiang/vcpkg-action@v1.0.1
         id: vcpkg
@@ -27,9 +29,6 @@ jobs:
           cache-key: ${{ matrix.config.os }}
           token: ${{ github.token }}
           github-binarycache: true
-
-      - uses: actions/checkout@v4
-      - uses: lukka/get-cmake@latest
 
       - name: Get current date
         id: date
@@ -41,7 +40,7 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{github.workspace}}/build
-        run: cmake -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        run: cmake ${{github.workspace}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
       - name: Build
         working-directory: ${{github.workspace}}/build
