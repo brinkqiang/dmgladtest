@@ -48,10 +48,9 @@ jobs:
         run: cmake --build . --config ${{env.BUILD_TYPE}}
 
       - name: Status
-        uses: Sibz/github-status-action@v1
+        uses: brinkqiang/github-status-action@v2
         with:
           authToken: ${{secrets.GITHUB_TOKEN}}
           context: 'Set Status'
           description: 'Passed'
           state: 'success'
-
