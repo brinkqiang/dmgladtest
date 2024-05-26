@@ -13,9 +13,9 @@ jobs:
     strategy:
       matrix:
         config:
-          os: [windows-latest]
-          visual_studio: ["Visual Studio 16 2019", "Visual Studio 17 2022"]
-          vcpkg_triplet: ["x64-windows"]
+          - os: windows-latest
+            visual_studio: Visual Studio 16 2019
+            vcpkg_triplet: x64-windows
 
     steps:
       - name: vcpkg build
