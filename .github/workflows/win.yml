@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: vcpkg build
-        uses: johnwason/vcpkg-action@v6
+        uses: johnwason/vcpkg-action@latest
         id: vcpkg
         with:
           pkgs: glad opengl glfw3
@@ -40,7 +40,7 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{runner.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg_triplet }}
+        run: cmake ${{ steps.vcpkg.outputs.vcpkg-cmake-config }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
       - name: Build
         working-directory: ${{runner.workspace}}/build
