@@ -18,4 +18,4 @@ link_directories(${GLFW_LIBRARY_DIRS})
 link_directories(${GLAD_LIBRARY_DIRS})
 link_directories(${OpenGL_LIBRARY_DIRS})
 
-ExeImport("test" "glad::glad;glfw;${OpenGL_LIB}")
+ExeImport("test" "glad::glad;glfw;OpenGL::GL")
