@@ -47,7 +47,16 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{github.workspace}}/build
-        run: cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
+        run:  |
+        if [ "${{ matrix.config.compiler }}" == "gcc" ]; then
+          export CC=gcc
+          export CXX=g++
+        elif [ "${{ matrix.config.compiler }}" == "clang" ]; then
+          export CC=clang
+          export CXX=clang++
+        fi
+
+        cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
 
       - name: Build
         working-directory: ${{github.workspace}}/build
