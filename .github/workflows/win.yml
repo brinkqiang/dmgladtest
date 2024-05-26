@@ -14,10 +14,10 @@ jobs:
       matrix:
         config:
           - os: windows-latest
-            visual_studio: Visual Studio 16 2019
+            compiler: msvc2019
             vcpkg_triplet: x64-windows
           - os: windows-latest
-            visual_studio: Visual Studio 17 2022
+            compiler: msvc2022
             vcpkg_triplet: x64-windows            
 
     steps:
