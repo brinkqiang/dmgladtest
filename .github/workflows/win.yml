@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: vcpkg build
-        uses: johnwason/vcpkg-action@v6
+        uses: brinkqiang/brinkqiang-vcpkg-action@v1
         id: vcpkg
         with:
           pkgs: glad opengl glfw3
@@ -28,7 +28,7 @@ jobs:
           token: ${{ github.token }}
           github-binarycache: true
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
 
       - name: Get current date
