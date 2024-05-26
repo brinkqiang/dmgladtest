@@ -14,10 +14,6 @@ jobs:
       matrix:
         config:
           - os: macos-latest
-            cc: gcc
-            cxx: g++
-            vcpkg_triplet: arm64-osx
-          - os: macos-latest
             cc: clang
             cxx: clang++
             vcpkg_triplet: arm64-osx
