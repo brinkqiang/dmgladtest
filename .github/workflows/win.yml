@@ -19,9 +19,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: lukka/get-cmake@latest
+      - uses: brinkqiang/get-cmake@v1
       - name: vcpkg build
-        uses: brinkqiang/vcpkg-action@v1.0.1
+        uses: brinkqiang/vcpkg-action@v1
         id: vcpkg
         with:
           pkgs: glad opengl glfw3
