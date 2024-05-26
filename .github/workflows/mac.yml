@@ -14,10 +14,12 @@ jobs:
       matrix:
         config:
           - os: macos-latest
-            compiler: gcc
+            cc: gcc
+            cxx: g++
             vcpkg_triplet: arm64-osx
           - os: macos-latest
-            compiler: clang
+            cc: clang
+            cxx: clang++
             vcpkg_triplet: arm64-osx
 
     steps:
@@ -43,7 +45,10 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{github.workspace}}/build
-        run: cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
+        run: |
+        set(ENV{CC} ${{ matrix.config.cc }})
+        set(ENV{CXX} ${{ matrix.config.cxx }})
+        cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
 
       - name: Build
         working-directory: ${{github.workspace}}/build
