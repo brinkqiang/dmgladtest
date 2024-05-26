@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: vcpkg build
-        uses: brinkqiang/brinkqiang-vcpkg-action@v1
+        uses: brinkqiang/vcpkg-action@v1
         id: vcpkg
         with:
           pkgs: glad opengl glfw3
