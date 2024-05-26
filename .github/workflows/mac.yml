@@ -14,6 +14,10 @@ jobs:
       matrix:
         config:
           - os: macos-latest
+            compiler: gcc
+            vcpkg_triplet: arm64-osx
+          - os: macos-latest
+            compiler: clang
             vcpkg_triplet: arm64-osx
 
     steps:
