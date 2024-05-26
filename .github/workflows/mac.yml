@@ -15,6 +15,15 @@ jobs:
         os: [macos-latest]
 
     steps:
+      - name: vcpkg build
+        uses: johnwason/vcpkg-action@v6
+        id: vcpkg
+        with:
+          pkgs: glad opengl glfw3
+          triplet: x64-os
+          token: ${{ github.token }}
+          github-binarycache: true
+
       - uses: actions/checkout@v2
       - uses: lukka/get-cmake@latest
 

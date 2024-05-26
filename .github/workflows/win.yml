@@ -16,6 +16,15 @@ jobs:
         visual_studio: ["Visual Studio 16 2019", "Visual Studio 17 2022"]
 
     steps:
+      - name: vcpkg build
+        uses: johnwason/vcpkg-action@v6
+        id: vcpkg
+        with:
+          pkgs: glad opengl glfw3
+          triplet: x64-windows
+          token: ${{ github.token }}
+          github-binarycache: true
+
       - uses: actions/checkout@v2
       - uses: lukka/get-cmake@latest
 
