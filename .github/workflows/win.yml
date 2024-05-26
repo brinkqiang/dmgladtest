@@ -12,9 +12,10 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
-        visual_studio: ["Visual Studio 16 2019", "Visual Studio 17 2022"]
-        triplet: x64-windows
+        config:
+          os: [windows-latest]
+          visual_studio: ["Visual Studio 16 2019", "Visual Studio 17 2022"]
+          vcpkg_triplet: x64-windows
 
     steps:
       - name: vcpkg build
@@ -22,7 +23,8 @@ jobs:
         id: vcpkg
         with:
           pkgs: glad opengl glfw3
-          triplet: matrix.${{ triplet }}
+          triplet: ${{ matrix.config.vcpkg_triplet }}
+          cache-key: ${{ matrix.config.os }}
           token: ${{ github.token }}
           github-binarycache: true
 
@@ -39,7 +41,7 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=matrix.${{ triplet }}
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_triplet }}
 
       - name: Build
         working-directory: ${{runner.workspace}}/build
